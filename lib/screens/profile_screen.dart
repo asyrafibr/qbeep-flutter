@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../models/contact.dart';
-import 'edit_profile_screen.dart'; // Import the EditProfileScreen
+import 'edit_profile_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   final Contact contact;
 
   const ProfileScreen({required this.contact, Key? key}) : super(key: key);
+
+  void _sendEmail(String email) async {
+    final Uri emailUri = Uri(
+      scheme: 'mailto',
+      path: email,
+      queryParameters: {'subject': 'Hello', 'body': 'How are you?'},
+    );
+
+    print("Attempting to launch: $emailUri");
+
+    if (!await launchUrl(emailUri)) {
+      print("Could not launch email app.");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +35,7 @@ class ProfileScreen extends StatelessWidget {
           ),
         ),
         centerTitle: true,
-
         backgroundColor: const Color(0xFF6D1B5E), // Adjust color
-
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
@@ -54,7 +67,6 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(height: 5),
           OutlinedButton(
             onPressed: () {
-              // Navigate to Edit Profile Screen
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -82,12 +94,9 @@ class ProfileScreen extends StatelessWidget {
             child: SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {
-                  // Handle send email action
-                },
+                onPressed: () => _sendEmail(contact.email),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFFB90A5D),
-
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
