@@ -1,0 +1,24 @@
+name: qbeep_flutter_assessment
+description: A Flutter contacts app.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_slidable: ^4.0.0
+  provider: ^6.1.3
+  http: ^1.3.0
+  sqflite: ^2.3.2
+  path_provider: ^2.1.2
+  url_launcher: ^6.3.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
